@@ -29,6 +29,7 @@ module.exports = function (input) {
 			accepting = true;
 			pathParts = [];
 			currentObj = {};
+			
 		} else {
 			if (accepting) {
 				pathParts.push(t.name);
@@ -41,6 +42,8 @@ module.exports = function (input) {
 		if (accepting) {
 			if (text.trim() !== "\n" && text.trim() !== "") {
 				dottie.set(currentObj, pathPartsString, text);
+				// console.log(text);
+				// console.log(pathPartsString);
 			}
 		}
 	});
@@ -85,7 +88,9 @@ function writeRecordToStream(record, headerMap, comma) {
 			record[header[3]][header[0]] :
 			record[header[0]];
 		const separator = idx === headerMap.length - 1 ? endOfLine : comma;
-
+        console.log("value " + field);
+		console.log(header[3])
+		console.log(header[0])
 		recordString += writeField(field, separator);
 	}
 

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfRoute>
+  <Route>
+    <Iso2 name="name1">AD</Iso2>
+    <Iso2 name="name2">AD2</Iso2>
+    <ZipFrom>60000</ZipFrom>
+    <ZipTo>60005</ZipTo>
+    <Agent>6000</Agent>
+    <Ruta></Ruta>
+    <Color>VERDE</Color>
+    <AvailableService>1110000</AvailableService>
+    <Airport>1110000</Airport>
+  </Route>
+  <Route>
+    <Iso2 name="name1">AD3</Iso2>
+    <Iso2 name="name2">AD4</Iso2>
+    <ZipFrom>60002</ZipFrom>
+    <ZipTo>60001</ZipTo>
+    <Agent>6000</Agent>
+    <Ruta>2A</Ruta>
+    <Color>VERDE</Color>
+    <AvailableService>1110000</AvailableService>
+    <Airport>1110000</Airport>
+  </Route>
+</ArrayOfRoute>
