@@ -32,7 +32,8 @@ module.exports = function (input) {
 			
 		} else {
 			if (accepting) {
-				pathParts.push(t.name);
+				// console.log({...t})
+				pathParts.push(t.attributes.name ? t.name + "-" + t.attributes.name : t.name);
 				pathPartsString = pathParts.join(".");
 			}
 		}
@@ -44,12 +45,14 @@ module.exports = function (input) {
 				dottie.set(currentObj, pathPartsString, text);
 				// console.log(text);
 				// console.log(pathPartsString);
+				// console.log({...currentObj})
 			}
 		}
 	});
 
 	saxStream.on("closetag", (tagName) => {
 		if (tagName === input.rootXMLElement) {
+			// console.log({...currentObj})
 			output.push(writeRecordToStream(currentObj, input.headerMap, comma));
 			count++;
 			accepting = false;
@@ -83,14 +86,17 @@ function writeHeadersToStream(headerMap, comma) {
 
 function writeRecordToStream(record, headerMap, comma) {
 	let recordString = "";
+	console.log({...record})
 	for (let [idx, header] of headerMap.entries()) {
-		const field = _.isObject(record[header[3]]) ?
-			record[header[3]][header[0]] :
-			record[header[0]];
+		// const field = _.isObject(record[header[3]]) ?
+		// 	record[header[3]][header[0]] :
+		// 	record[header[0]];
+		const field = record[header[0]];
 		const separator = idx === headerMap.length - 1 ? endOfLine : comma;
-        console.log("value " + field);
-		console.log(header[3])
-		console.log(header[0])
+        // console.log("sss " + field);
+		// console.log(header[3])
+		// console.log(header[0])
+		// console.log(idx + " | " + headerMap.length)
 		recordString += writeField(field, separator);
 	}
 
