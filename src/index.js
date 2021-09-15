@@ -27,17 +27,10 @@ module.exports = function (input) {
 	saxStream.on("opentag", function (t) {
 		// console.log({...t})
 		// console.log(input.rootXMLElement[0])
-		if (t.name === input.rootXMLElement[0]) {
+		if (t.name === input.rootXMLElement) {
 			accepting = true;
 			pathParts = [];
 			currentObj = {};
-		} else if (t.name === input.rootXMLElement[1]) {
-				accepting = true;
-				pathParts.push(t.attributes.name === "id" ? t.name + "-" + t.attributes.name : t.name);
-				pathPartsString = pathParts.join(".");
-				console.log(pathPartsString)
-				currentObj = {};
-				console.log("xxx")
 		} else {
 			if (accepting) {
 				console.log("ttt")
@@ -45,7 +38,7 @@ module.exports = function (input) {
 				// pathParts.push(t.attributes.name ? t.name + "-" + t.attributes.name : t.name);
 				// pathParts.push("entities")
 				// pathParts.push("entity")
-				pathParts.push(t.name);
+				pathParts.push(t.attributes.name ? t.name + "-" + t.attributes.name : t.name);
 				pathPartsString = pathParts.join(".");
 				console.log(pathPartsString)
 				console.log("vvv")
@@ -72,14 +65,6 @@ module.exports = function (input) {
 			console.log({...currentObj})
 			output.push(writeRecordToStream(currentObj, input.headerMap, comma));
 			console.log("jjj")
-			count++;
-			accepting = false;
-			currentObj = {};
-		}else if (tagName === input.rootXMLElement[1]) {
-			console.log("bbb")
-			console.log({...currentObj})
-			output.push(writeRecordToStream(currentObj, input.headerMap, comma));
-			console.log("bbb")
 			count++;
 			accepting = false;
 			currentObj = {};
@@ -112,18 +97,72 @@ function writeHeadersToStream(headerMap, comma) {
 
 function writeRecordToStream(record, headerMap, comma) {
 	let recordString = "";
-	// console.log({...record})
+	var nameList = [];
+	var dob;
+	var addressList = [];
+	var listCode;
+	var identificationNumList = [];
+	// console.log("version " + version);
 	for (let [idx, header] of headerMap.entries()) {
-		// const field = _.isObject(record[header[3]]) ?
-		// 	record[header[3]][header[0]] :
-		// 	record[header[0]];
-		const field = record[header[0]];
-		const separator = idx === headerMap.length - 1 ? endOfLine : comma;
-        // console.log("sss " + field);
-		// console.log(header[3])
-		// console.log(header[0])
-		// console.log(idx + " | " + headerMap.length)
-		recordString += writeField(field, separator);
+		if (header[0] === "name" && record[header[0]] != undefined) {
+			nameList.push(...record[header[0]].replace(",", " "));
+			
+		} else if (header[0] === "sdf_Aliases" && record[header[0]] != undefined) {
+			if (record[header[0]].indexOf(';') != -1) {
+				nameList.push(...record[header[0]].split(';'));
+			} else {
+				nameList.push(...record[header[0]]);
+			}
+		} else if (header[0] === "dob" && record[header[0]] != undefined) {
+			if (record[header[0]].indexOf(',') != -1 ) {
+				dob = record[header[0]].split(',')[0];
+			} else {
+				dob = record[header[0]];
+			}
+		} else if ((header[0] === "address1" || header[0] === "address2" ||
+			header[0] === "Iso2_AltAddress") && record[header[0]] != undefined ) {
+			if (record[header[0]] != "" || record[header[0]] != null) {
+				addressList.push(record[header[0]].replace(",", " "));
+			}
+		} else if (header[0] === "listCode" && record[header[0]] != undefined) {
+			listCode = record[header[0]];
+		} else if ((header[0] === "passportNum" || header[0] === "sdf_AltPassport2" ||
+			header[0] === "sdf_NATIONAL NO") && record[header[0]] != undefined) {
+			console.log("sss " + record[header[0]])
+			identificationNumList.push(record[header[0]]);
+			// console.log("qqq " + identificationNumList.length)
+		}
+		let row = '';
+		if (lineNo === 0) {
+			// row += version;
+			lineNo = -1;
+		} else {
+			row += ',';
+		}
+		if (idx === headerMap.length - 1) {
+			
+			row += (listCode ? listCode: '') + ',';
+			for (let i = 0; i <=2; i++) {
+				row += identificationNumList[i] ? identificationNumList[i] :'';
+				row += ',';
+				// console.log("row " + identificationNumList[i])
+				// console.log("ddd " + row)
+			}
+			for (let i = 0; i <=9; i++) {
+				row += nameList[i] ? nameList[i] :'';
+				row += ',';
+			}
+			row += (dob ? dob: '') + ',';
+			row += (addressList[0] ? addressList[0] : '') + ',';
+
+			recordString += writeField(row, endOfLine);
+			row = ''
+			nameList = []
+			dob = undefined
+			listCode = undefined
+			addressList = []
+			identificationNumList = []
+		}
 	}
 
 	return recordString;
