@@ -27,17 +27,10 @@ module.exports = function (input) {
 	saxStream.on("opentag", function (t) {
 		// console.log({...t})
 		// console.log(input.rootXMLElement[0])
-		if (t.name === input.rootXMLElement[0]) {
+		if (t.name === input.rootXMLElement) {
 			accepting = true;
 			pathParts = [];
 			currentObj = {};
-		} else if (t.name === input.rootXMLElement[1]) {
-				accepting = true;
-				pathParts.push(t.attributes.name === "id" ? t.name + "-" + t.attributes.name : t.name);
-				pathPartsString = pathParts.join(".");
-				console.log(pathPartsString)
-				currentObj = {};
-				console.log("xxx")
 		} else {
 			if (accepting) {
 				console.log("ttt")
@@ -67,19 +60,11 @@ module.exports = function (input) {
 
 	saxStream.on("closetag", (tagName) => {
 		console.log(tagName);
-		if (tagName === input.rootXMLElement[0]) {
+		if (tagName === input.rootXMLElement) {
 			console.log("jjj")
 			console.log({...currentObj})
 			output.push(writeRecordToStream(currentObj, input.headerMap, comma));
 			console.log("jjj")
-			count++;
-			accepting = false;
-			currentObj = {};
-		}else if (tagName === input.rootXMLElement[1]) {
-			console.log("bbb")
-			console.log({...currentObj})
-			output.push(writeRecordToStream(currentObj, input.headerMap, comma));
-			console.log("bbb")
 			count++;
 			accepting = false;
 			currentObj = {};
