@@ -1,5 +1,5 @@
 const fs = require("fs");
-const xmlcsv = require('./src/index');
+const xmlcsv = require('./src/index-copy');
  
 xmlcsv({
     source: fs.createReadStream("./sample.xml"),

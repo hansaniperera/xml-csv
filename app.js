@@ -4,9 +4,9 @@ const xmlcsv = require('./src/index');
 xmlcsv({
     source: fs.createReadStream("./test.xml"),
     rootXMLElement: ["entity", "version"],
-        // rootXMLElement1: "version",
+        
         headerMap: [
-            // ["version", "Version", "string"],
+            ["version", "Version", "string"],
             ["name", "Name 1", "string"],
             ["listCode", "Sanction list file name", "string"],
             ["passportNum", "Identification number 1", "string"],

@@ -25,61 +25,38 @@ module.exports = function (input) {
 	output.push(writeHeadersToStream(input.headerMap, comma));
 
 	saxStream.on("opentag", function (t) {
-		// console.log({...t})
-		// console.log(input.rootXMLElement[0])
-		if (t.name === input.rootXMLElement[0]) {
+		console.log({...t})
+		console.log(input.rootXMLElement)
+		if (t.name === input.rootXMLElement) {
 			accepting = true;
 			pathParts = [];
 			currentObj = {};
-		} else if (t.name === input.rootXMLElement[1]) {
-				accepting = true;
-				pathParts.push(t.attributes.name === "id" ? t.name + "-" + t.attributes.name : t.name);
-				pathPartsString = pathParts.join(".");
-				console.log(pathPartsString)
-				currentObj = {};
-				console.log("xxx")
+			
 		} else {
 			if (accepting) {
-				console.log("ttt")
-				console.log({...t})
-				// pathParts.push(t.attributes.name ? t.name + "-" + t.attributes.name : t.name);
-				// pathParts.push("entities")
-				// pathParts.push("entity")
-				pathParts.push(t.name);
+				pathParts.push(t.attributes.name ? t.name + "-" + t.attributes.name : t.name);
 				pathPartsString = pathParts.join(".");
-				console.log(pathPartsString)
-				console.log("vvv")
+                console.log("pathPartsString " + pathPartsString)
+                
 			}
 		}
 	});
 
 	saxStream.on("text", function (text) {
-		console.log("ddd")
-		console.log(text);
 		if (accepting) {
 			if (text.trim() !== "\n" && text.trim() !== "") {
 				dottie.set(currentObj, pathPartsString, text);
+				// console.log(text);
 				// console.log(pathPartsString);
-				console.log({...currentObj})
+				// console.log({...currentObj})
 			}
 		}
 	});
 
 	saxStream.on("closetag", (tagName) => {
-		console.log(tagName);
-		if (tagName === input.rootXMLElement[0]) {
-			console.log("jjj")
-			console.log({...currentObj})
+		if (tagName === input.rootXMLElement) {
+			// console.log({...currentObj})
 			output.push(writeRecordToStream(currentObj, input.headerMap, comma));
-			console.log("jjj")
-			count++;
-			accepting = false;
-			currentObj = {};
-		}else if (tagName === input.rootXMLElement[1]) {
-			console.log("bbb")
-			console.log({...currentObj})
-			output.push(writeRecordToStream(currentObj, input.headerMap, comma));
-			console.log("bbb")
 			count++;
 			accepting = false;
 			currentObj = {};
@@ -112,7 +89,7 @@ function writeHeadersToStream(headerMap, comma) {
 
 function writeRecordToStream(record, headerMap, comma) {
 	let recordString = "";
-	// console.log({...record})
+	console.log({...record})
 	for (let [idx, header] of headerMap.entries()) {
 		// const field = _.isObject(record[header[3]]) ?
 		// 	record[header[3]][header[0]] :
