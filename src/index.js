@@ -25,6 +25,8 @@ module.exports = function (input) {
 	output.push(writeHeadersToStream(input.headerMap, comma));
 
 	saxStream.on("opentag", function (t) {
+		console.log({...t})
+		console.log(input.rootXMLElement)
 		if (t.name === input.rootXMLElement) {
 			accepting = true;
 			pathParts = [];
@@ -32,7 +34,6 @@ module.exports = function (input) {
 			
 		} else {
 			if (accepting) {
-				// console.log({...t})
 				pathParts.push(t.attributes.name ? t.name + "-" + t.attributes.name : t.name);
 				pathPartsString = pathParts.join(".");
 			}

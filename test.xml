@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<version>20210706160428</version>
+<entities>
+    <entity id="385" version="20160829161053">
+        <name>HAN DAWOOD</name>
+        <listId>33</listId>
+        <listCode>EU</listCode>
+        <entityType>03</entityType>
+        <createdDate>08/29/2016</createdDate>
+        <lastUpdateDate>08/29/2016</lastUpdateDate>
+        <dob>12/26/1955</dob>
+        <passportNum>A-333602</passportNum>
+        <title>SHEIKH</title>
+        <source>EU</source>
+        <address1>WHITE HOUSE, NEAR SAUDI MOSQUE, CLIFTON</address1>
+        <city>KARACHI</city>
+        <country>PK</country>
+        <countryName>PAKISTAN</countryName>
+        <sdf name="Aliases">KASKAR, DAWOOD IBRAHIM</sdf>
+        <sdf name="AltPassport">M110522 (issued 11/13/78 Bombay, India); R841697 (issued 11/24/81 Bombay, India); F823692 (Jeddah issued by CGI Jeddah 9/2/89); A501801 (Bombay, India, 7/26/85); K560098 (Bombay, 7/30/75 Indian); V57865 (Bombay, 10/3/83); P537849 (Bombay issued 7/30/79)</sdf>
+        <sdf name="AltPassport2">A717288 (MISUSE issued 8/18/85, Dubai); G866537 (MISUSE Pakistan issued 8/12/91, Rawalpindi); C-267185 (issued in Karachi in July 1996); H-123259 (issued in Rawalpindi July 2001); G-869537 (issued in Rawalpindi); KC-285901</sdf>
+        <sdf name="EffectiveDate">8/28/2016</sdf>
+        <sdf name="Gender">M</sdf>
+        <sdf name="Legal_Basis">2016/1430 (OJ L232)</sdf>
+        <sdf name="Measures">ISIL (DA'ESH) AND AL-QAIDA ORGANISATIONS</sdf>
+        <sdf name="NATIONALITY">INDIAN</sdf>
+        <sdf name="OriginalID">1079</sdf>
+        <sdf name="OriginalSource">EUROPEAN UNION</sdf>
+        <sdf name="OtherInformation">Date of designation referred to in Article 2a (4) (b): 3.11.2003</sdf>
+        <sdf name="OtherInformation2">Father's name is Sheikh Ibrahim Ali Kaskar, mother's name is Amina Bi, wife's name is Mehjabeen Shaikh.</sdf>
+        <sdf name="POB">KHER, RATNAGIRI, MAHARASHTRA, INDIA</sdf>
+        <sdf name="PRGM_CODE">TAQA</sdf>
+        <sdf name="P_ID">59690</sdf>
+        <sdf name="Passportissuedcountry">ISSUED IN BOMBAY, INDIA ON 4 JUNE 1985; REVOKED BY THE GOVERNMENT OF INDIA</sdf>
+    </entity>
+    <entity id="385" version="20160829161053">
+        <name>BHAI, DAWOOD</name>
+        <listId>33</listId>
+        <listCode>EU</listCode>
+        <entityType>03</entityType>
+        <createdDate>08/29/2016</createdDate>
+        <lastUpdateDate>08/29/2016</lastUpdateDate>
+        <dob>12/26/1955</dob>
+        <passportNum>A-333602</passportNum>
+        <title>SHEIKH</title>
+        <source>EU</source>
+        <address1>WHITE HOUSE, NEAR SAUDI MOSQUE, CLIFTON</address1>
+        <city>KARACHI</city>
+        <country>PK</country>
+        <countryName>PAKISTAN</countryName>
+        <sdf name="Aliases">KASKAR, DAWOOD IBRAHIM</sdf>
+        <sdf name="AltPassport">M110522 (issued 11/13/78 Bombay, India); R841697 (issued 11/24/81 Bombay, India); F823692 (Jeddah issued by CGI Jeddah 9/2/89); A501801 (Bombay, India, 7/26/85); K560098 (Bombay, 7/30/75 Indian); V57865 (Bombay, 10/3/83); P537849 (Bombay issued 7/30/79)</sdf>
+        <sdf name="AltPassport2">A717288 (MISUSE issued 8/18/85, Dubai); G866537 (MISUSE Pakistan issued 8/12/91, Rawalpindi); C-267185 (issued in Karachi in July 1996); H-123259 (issued in Rawalpindi July 2001); G-869537 (issued in Rawalpindi); KC-285901</sdf>
+        <sdf name="EffectiveDate">8/28/2016</sdf>
+        <sdf name="Gender">M</sdf>
+        <sdf name="Legal_Basis">2016/1430 (OJ L232)</sdf>
+        <sdf name="Measures">ISIL (DA'ESH) AND AL-QAIDA ORGANISATIONS</sdf>
+        <sdf name="NATIONALITY">INDIAN</sdf>
+        <sdf name="OriginalID">1079</sdf>
+        <sdf name="OriginalSource">EUROPEAN UNION</sdf>
+        <sdf name="OtherInformation">Date of designation referred to in Article 2a (4) (b): 3.11.2003</sdf>
+        <sdf name="OtherInformation2">Father's name is Sheikh Ibrahim Ali Kaskar, mother's name is Amina Bi, wife's name is Mehjabeen Shaikh.</sdf>
+        <sdf name="POB">KHER, RATNAGIRI, MAHARASHTRA, INDIA</sdf>
+        <sdf name="PRGM_CODE">TAQA</sdf>
+        <sdf name="P_ID">59690</sdf>
+        <sdf name="Passportissuedcountry">ISSUED IN BOMBAY, INDIA ON 4 JUNE 1985; REVOKED BY THE GOVERNMENT OF INDIA</sdf>
+    </entity>
+</entities>

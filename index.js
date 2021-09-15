@@ -15,4 +15,4 @@ xmlcsv({
         ["AvailableService", "AvailableService", "string"],
         ["Airport", "GatewayAirport", "string"]
     ]
-}).pipe(fs.createWriteStream("./sample_2.csv"));
+}).pipe(fs.createWriteStream("./sample_3.csv"));
