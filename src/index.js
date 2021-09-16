@@ -7,6 +7,8 @@ const stream = require("stream");
 const endOfLine = require("os").EOL;
 const util = require("util");
 
+let individualId;
+
 module.exports = function (input) {
 	const comma = input.delimiter || ",";
 	const saxStream = sax.createStream(true);
@@ -29,13 +31,13 @@ module.exports = function (input) {
 		// console.log(input.rootXMLElement[0])
 		if (t.name === input.rootXMLElement) {
 			accepting = true;
-			if (t.attributes.name === "id") {
-				pathParts.push(t.name + "-" + t.attributes.name);
-				pathPartsString = pathParts.join(".");
-			} else {
+			// console.log(t.attributes.hasOwnProperty("id"))
+			if (t.attributes.hasOwnProperty("id")) {
+				individualId = t.attributes["id"]
+				console.log("individualId " + individualId)
+			}
 				pathParts = [];
-				currentObj = {};
-			}			
+				currentObj = {};			
 		} else {
 			if (accepting) {
 				// console.log("ttt")
@@ -112,7 +114,7 @@ function writeRecordToStream(record, headerMap, comma) {
 	for (let [idx, header] of headerMap.entries()) {
 		if (header[0] === "name" && record[header[0]] != undefined) {
 			nameList.push(record[header[0]].replace(/,/g, " "));
-			console.log(record[header[0]])
+			// console.log(record[header[0]])
 		} else if (header[0] === "sdf_Aliases" && record[header[0]] != undefined) {
 			if (record[header[0]].indexOf(';') != -1) {
 				nameList.push(record[header[0]].replace(/,/g, " ").split(';'));
@@ -132,7 +134,7 @@ function writeRecordToStream(record, headerMap, comma) {
 			header[0] === "Iso2_AltAddress") && record[header[0]] != undefined ) {
 			if (record[header[0]] != "" || record[header[0]] != null) {
 				addressList.push(record[header[0]].replace(/,/g, " "));
-				console.log(addressList)
+				// console.log(addressList)
 			}
 		} else if (header[0] === "listCode" && record[header[0]] != undefined) {
 			listCode = record[header[0]];
@@ -142,15 +144,15 @@ function writeRecordToStream(record, headerMap, comma) {
 			// console.log("sss " + record[header[0]])
 			identificationNumList.push(record[header[0]].replace(/,/g, " "));
 			// console.log("qqq " + identificationNumList.length)
-			console.log(identificationNumList)
-		} else if (header[0] === "entity_id" && record[header[0]] != undefined) {
-			id = record[header[0]];
+			// console.log(identificationNumList)
+		// } else if (header[0] === "entity_id" && record[header[0]] != undefined) {
+		// 	id = record[header[0]];
 		}
 		let row = '';
 		if (idx === headerMap.length - 1) {
 			
 			row += (listCode ? listCode: '') + ',';
-			row += (id ? id: '') + ',';
+			row += (individualId ? individualId: '') + ',';
 			for (let i = 0; i <=9; i++) {
 				row += nameList[i] ? nameList[i] :'';
 				row += ',';
@@ -173,6 +175,7 @@ function writeRecordToStream(record, headerMap, comma) {
 			id = undefined
 			addressList = []
 			identificationNumList = []
+			individualId = undefined
 		}
 	}
 

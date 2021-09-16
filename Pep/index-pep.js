@@ -108,6 +108,9 @@ function writeRecordToStream(record, headerMap, comma) {
 	var listCode;
 	var identificationNumList = [];
 	var id;
+    var designation;
+    var party;
+    var govtBody;
 	// console.log("version " + version);
 	for (let [idx, header] of headerMap.entries()) {
 		if (header[0] === "name" && record[header[0]] != undefined) {
@@ -145,6 +148,12 @@ function writeRecordToStream(record, headerMap, comma) {
 			console.log(identificationNumList)
 		} else if (header[0] === "entity_id" && record[header[0]] != undefined) {
 			id = record[header[0]];
+		} else if (header[0] === "sdf_GovDesignation" && record[header[0]] != undefined) {
+			govtBody = record[header[0]].replace(/,/g, " ");
+		} else if (header[0] === "sdf_OtherInformation" && record[header[0]] != undefined) {
+			party = record[header[0]].replace(/,/g, " ");
+		} else if (header[0] === "title" && record[header[0]] != undefined) {
+			designation = record[header[0]].replace(/,/g, " ");
 		}
 		let row = '';
 		if (idx === headerMap.length - 1) {
@@ -154,14 +163,17 @@ function writeRecordToStream(record, headerMap, comma) {
 			for (let i = 0; i <=9; i++) {
 				row += nameList[i] ? nameList[i] :'';
 				row += ',';
-			}			
+			}	
+            row += (govtBody ? govtBody: '') + ',';		
 			for (let i = 0; i <=3; i++) {
 				row += identificationNumList[i] ? identificationNumList[i] :'';
 				row += ',';
 				// console.log("row " + identificationNumList[i])
 				// console.log("ddd " + row)
 			}
-			row += (dob ? dob: '') + ',';
+            row += (party ? party: '') + ',';		
+            row += (designation ? designation: '') + ',';		
+			row += (dob[0] ? dob[0]: '') + ',';
 			row += (addressList[0] ? addressList[0] : '') + ',';
 
 			recordString += writeField(row, endOfLine);
@@ -173,6 +185,9 @@ function writeRecordToStream(record, headerMap, comma) {
 			id = undefined
 			addressList = []
 			identificationNumList = []
+            party = undefined
+            govtBody = undefined
+            designation = undefined
 		}
 	}
 
