@@ -19,7 +19,7 @@ xmlcsv({
             ["", "Name 8", "string"],
             ["", "Name 9", "string"],
             ["", "Name 10", "string"],
-
+            ["sdf_GovDesignation", "Government body", "string"],
             ["passportNum", "Identification number 1", "string"],
             ["sdf_AltPassport", "Identification number 2", "string", "AltPassport"],
             ["sdf_AltPassport2", "Identification number 3", "string", "AltPassport2"],
@@ -31,9 +31,12 @@ xmlcsv({
             
             // ["createdDate", "createdDate", "string"],
             // ["lastUpdateDate", "lastUpdateDate", "string"],
+            ["sdf_OtherInformation", "Party", "string", "OtherInformation"],
+            ["title", "Designation", "string"],
             ["dob", "dob", "string"],
             ["address1", "Address 1", "string"],
+            ["sdf_AltDOB", "", "string", "AltDOB"],
             ["address2", "", "string"],
             ["Iso2_AltAddress", "", "string", "AltAddress"],
     ]
-}).pipe(fs.createWriteStream("./sample_3.csv"));
+}).pipe(fs.createWriteStream("./sample_5.csv"));

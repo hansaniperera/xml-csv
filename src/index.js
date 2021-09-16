@@ -161,14 +161,14 @@ function writeRecordToStream(record, headerMap, comma) {
 				// console.log("row " + identificationNumList[i])
 				// console.log("ddd " + row)
 			}
-			row += (dob ? dob: '') + ',';
+			row += (dob[0] ? dob[0]: '') + ',';
 			row += (addressList[0] ? addressList[0] : '') + ',';
 
 			recordString += writeField(row, endOfLine);
 			
 			row = ''
 			nameList = []
-			dob = undefined
+			dob = []
 			listCode = undefined
 			id = undefined
 			addressList = []

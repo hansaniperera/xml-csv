@@ -33,6 +33,7 @@ xmlcsv({
             // ["lastUpdateDate", "lastUpdateDate", "string"],
             ["dob", "dob", "string"],
             ["address1", "Address 1", "string"],
+            ["sdf_AltDOB", "", "string", "AltDOB"],
             ["address2", "", "string"],
             ["Iso2_AltAddress", "", "string", "AltAddress"],
     ]
