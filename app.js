@@ -3,10 +3,10 @@ const xmlcsv = require('./src/index');
  
 xmlcsv({
     source: fs.createReadStream("./test.xml"),
-    rootXMLElement: "entity",
+    rootXMLElement: ["entity", "version"],
         
         headerMap: [
-            // ["version", "Version", "string"],
+            ["version", "Version", "string"],
             ["listCode", "Sanction list file name", "string"],
             ["entity_id", "Id", "string", "id"],
             ["name", "Name 1", "string"],
