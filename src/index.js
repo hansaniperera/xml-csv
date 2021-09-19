@@ -1,7 +1,7 @@
 "use strict";
 
 const _ = require("lodash");
-const sax = require("sax");
+const sax = require("../sax");
 const dottie = require("dottie");
 const stream = require("stream");
 const endOfLine = require("os").EOL;
