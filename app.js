@@ -1,8 +1,9 @@
 const fs = require("fs");
+
 const xmlcsv = require('./src/index');
  
 xmlcsv({
-    source: fs.createReadStream("./test.xml"),
+    source: fs.createReadStream('./test.xml'),
     rootXMLElement: ["entity", "version"],
         
         headerMap: [
@@ -38,3 +39,7 @@ xmlcsv({
             ["Iso2_AltAddress", "", "string", "AltAddress"],
     ]
 }).pipe(fs.createWriteStream("./sample_3.csv"));
+
+
+
+
