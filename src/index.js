@@ -65,14 +65,15 @@ module.exports = function (input) {
 	saxStream.on("closetag", (tagName) => {
 		if (tagName === input.rootXMLElement[0]) {
 			lineNo = count;
+			console.log(count)
 			output.push(writeRecordToStream(currentObj, input.headerMap, comma));
 			count++;
 			accepting = false;
 			// currentObj = {};
 		} else if (tagName === input.rootXMLElement[1]) {
 			versionNumber = currentObj["version"]
-			console.log(currentObj)
-			console.log(versionNumber)
+			// console.log(currentObj)
+			// console.log(versionNumber)
 		} else {
 			pathParts.pop();
 		}
@@ -113,17 +114,17 @@ function writeRecordToStream(record, headerMap, comma) {
 			nameList.push(record[header[0]].replace(/,/g, " "));
 		} else if (header[0] === "sdf_Aliases" && record[header[0]] != undefined) {
 			if (record[header[0]].indexOf(';') != -1) {
-				nameList.push(record[header[0]].replace(/,/g, " ").split(';'));
+				nameList.push(...record[header[0]].replace(/,/g, " ").split(';'));
 			} else {
 				nameList.push(record[header[0]].replace(/,/g, " "));
 			}
 		} else if (header[0] === "dob" && record[header[0]] != undefined) {
-				dob.push(record[header[0]]);
+				dob.push(record[header[0]].replace(/,/g, " "));
 		} else if (header[0] === "sdf_AltDOB" && record[header[0]] != undefined) {
 			if (record[header[0]].indexOf(';') != -1) {
-				dob.push(record[header[0]].split(';'));
+				dob.push(...record[header[0]].replace(/,/g, " ").split(';'));
 			} else {
-				dob.push(record[header[0]]);
+				dob.push(record[header[0]].replace(/,/g, " "));
 			}		
 		} else if ((header[0] === "address1" || header[0] === "address2" ||
 			header[0] === "Iso2_AltAddress") && record[header[0]] != undefined ) {
@@ -131,13 +132,15 @@ function writeRecordToStream(record, headerMap, comma) {
 				addressList.push(record[header[0]].replace(/,/g, " "));
 			}
 		} else if (header[0] === "listCode" && record[header[0]] != undefined) {
-			listCode = record[header[0]];
+			listCode = record[header[0]].replace(/,/g, " ");
 
 		} else if ((header[0] === "passportNum" || header[0] === "sdf_AltPassport2" ||
 			header[0] === "sdf_AltPassport" || header[0] === "sdf_NATIONAL NO") && record[header[0]] != undefined) {
 			identificationNumList.push(record[header[0]].replace(/,/g, " "));
 		} 
 		let row = '';
+		// console.log(dob)
+		// console.log(nameList)
 		if (idx === headerMap.length - 1) {
 			if (lineNo == 0) {
 				row += (versionNumber ? versionNumber: '') + ',';
@@ -147,12 +150,12 @@ function writeRecordToStream(record, headerMap, comma) {
 			row += (listCode ? listCode: '') + ',';
 			row += (individualId ? individualId: '') + ',';
 			for (let i = 0; i <=9; i++) {
-				row += nameList[i] ? nameList[i] :'';
-				row += ',';
+				row += (nameList[i] ? nameList[i] :'') + ',';
+				// row += ',';
 			}			
 			for (let i = 0; i <=3; i++) {
-				row += identificationNumList[i] ? identificationNumList[i] :'';
-				row += ',';
+				row += (identificationNumList[i] ? identificationNumList[i] :'') + ',';
+				// row += ',';
 			}
 			row += (dob[0] ? dob[0]: '') + ',';
 			row += (addressList[0] ? addressList[0] : '') + ',';

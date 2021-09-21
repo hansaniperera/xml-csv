@@ -3,7 +3,7 @@ const fs = require("fs");
 const xmlcsv = require('./src/index');
  
 xmlcsv({
-    source: fs.createReadStream('./test.xml'),
+    source: fs.createReadStream('D:\\Ezcash\\FRS\\Accuity\\GWL_21002_GWLXML\\ENTITY.XML'),
     rootXMLElement: ["entity", "version"],
         
         headerMap: [
@@ -38,8 +38,7 @@ xmlcsv({
             ["address2", "", "string"],
             ["Iso2_AltAddress", "", "string", "AltAddress"],
     ]
-}).pipe(fs.createWriteStream("./sample_3.csv"));
-
+}).pipe(fs.createWriteStream("./sample_gwl.csv"));
 
 
 

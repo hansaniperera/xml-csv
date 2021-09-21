@@ -2,21 +2,15 @@ const splitStream =require('csv-split-stream')
 const fs = require("fs");
 
 return ( splitStream.split(
-    fs.createReadStream('./sample_3.csv'),
+    fs.createReadStream('./Pep/sample_pep.csv'),
     {
-      lineLimit: 4
+      lineLimit: 300000
     },
-    (index) => fs.createWriteStream(`./output-${index}.csv`)
+    (index) => fs.createWriteStream(`./pep-${index}.csv`)
   )
   .then(csvSplitResponse => {
     console.log('csvSplitStream succeeded.', csvSplitResponse);
-    // outputs: {
-    //  "totalChunks": 350,
-    //  "options": {
-    //    "delimiter": "\n",
-    //    "lineLimit": "10000"
-    //  }
-    // }
+    
   }).catch(csvSplitError => {
     console.log('csvSplitStream failed!', csvSplitError);
   }));

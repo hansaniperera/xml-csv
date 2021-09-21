@@ -1,12 +1,11 @@
 const fs = require("fs");
-const xmlcsv = require('./src/index');
+const xmlcsv = require('./index-pep');
  
 xmlcsv({
-    source: fs.createReadStream("./test.xml"),
+    source: fs.createReadStream("D:\\Ezcash\\FRS\\Accuity\\PEP_19044_GWLXML\\ENTITY.XML"),
     rootXMLElement: "entity",
         
         headerMap: [
-            // ["version", "Version", "string"],
             ["listCode", "Sanction list file name", "string"],
             ["entity_id", "Id", "string", "id"],
             ["name", "Name 1", "string"],
@@ -24,13 +23,6 @@ xmlcsv({
             ["sdf_AltPassport", "Identification number 2", "string", "AltPassport"],
             ["sdf_AltPassport2", "Identification number 3", "string", "AltPassport2"],
             ["sdf_NATIONAL NO", "Identification number 4", "string", "NATIONAL NO"],
-            
-            
-            // ["listId", "listId", "string"],            
-            // ["entityType", "entityType", "string"],
-            
-            // ["createdDate", "createdDate", "string"],
-            // ["lastUpdateDate", "lastUpdateDate", "string"],
             ["sdf_OtherInformation", "Party", "string", "OtherInformation"],
             ["title", "Designation", "string"],
             ["dob", "dob", "string"],
@@ -39,4 +31,4 @@ xmlcsv({
             ["address2", "", "string"],
             ["Iso2_AltAddress", "", "string", "AltAddress"],
     ]
-}).pipe(fs.createWriteStream("./sample_5.csv"));
+}).pipe(fs.createWriteStream("./sample_pep.csv"));
